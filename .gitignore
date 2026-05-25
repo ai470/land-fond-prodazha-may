@@ -1,0 +1,7 @@
+# Word files and document archives
+*.docx
+*.mhtml
+
+# OS temporary files
+.DS_Store
+Thumbs.db
