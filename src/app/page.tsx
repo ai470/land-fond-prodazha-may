@@ -55,28 +55,28 @@ const forWhomData = [
     title: "Тревога за семью",
     desc: "Вы хотите финансовую опору для семьи, а не жизнь от зарплаты до зарплаты.",
     after: "У вас будет система, которая превращает часть дохода в растущий капитал. Не «когда-нибудь потом», а по конкретному плану.",
-    img: "images/target_card.jpeg",
+    img: "images/target_1.jpeg",
   },
   {
     num: "02",
     title: "Тревога о будущем",
     desc: "Вы понимаете, что на одну пенсию жить не получится — и хотите успеть создать капитал.",
     after: "Вы будете знать, сколько нужно откладывать, куда направлять и как защитить то, что уже есть.",
-    img: "images/portfolio_growth.jpeg",
+    img: "images/target_2.jpeg",
   },
   {
     num: "03",
     title: "Финансовый хаос",
     desc: "Деньги приходят, но системы нет — и вы чувствуете, что теряете контроль.",
     after: "Вместо хаоса — система. Вместо тревоги — план. Вместо «что делать с деньгами» — работающий портфель.",
-    img: "images/tools_visual.jpeg",
+    img: "images/target_3.jpeg",
   },
   {
     num: "04",
     title: "Есть опыт, нет системы",
     desc: "Вы уже инвестируете, но без стратегии — покупаете по интуиции, реагируете на новости.",
     after: "Вы пересоберёте портфель по системе — с обоснованием каждой позиции и протоколами на случай паники.",
-    img: "images/stocks_analysis.jpeg",
+    img: "images/target_4.jpeg",
   },
 ];
 
@@ -645,7 +645,6 @@ export default function Home() {
         <section className="section forwhom-section reveal-section">
           <div className="container">
             <div className="section-head section-head-light">
-              <p className="section-kicker">Это для вас</p>
               <h2>Эта программа — для вас, если</h2>
               <p>Не важно, сколько вам лет, какой у вас доход и есть ли опыт. Важно — что вы чувствуете прямо сейчас.</p>
             </div>
@@ -702,7 +701,6 @@ export default function Home() {
           <div className="container">
             <div className="tools-layout">
               <div className="tools-copy">
-                <p className="section-kicker">Ваша инвестиционная инфраструктура</p>
                 <h2>10 рабочих инструментов,<br />которые останутся<br />с вами <span className="heading-accent">навсегда*</span></h2>
                 <p className="tools-lead">Знания устаревают. Инструменты — работают годами.</p>
 
@@ -737,7 +735,6 @@ export default function Home() {
         <section className="section howitworks-section reveal-section">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Формат</p>
               <h2>Как проходит обучение</h2>
             </div>
             <div className="hiw-grid">
@@ -782,7 +779,6 @@ export default function Home() {
         <section className="section program-section reveal-section" id="program">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Содержание</p>
               <h2>Программа образовательного курса</h2>
               <p>8 модулей + 3 бонусных · 46 уроков · от основ до защиты портфеля перед экспертом</p>
             </div>
@@ -921,7 +917,6 @@ export default function Home() {
         <section className="section experts-section reveal-section" id="experts">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Команда</p>
               <h2>Эксперты образовательной программы</h2>
             </div>
 
@@ -964,7 +959,6 @@ export default function Home() {
         <section className="section pricing-section reveal-section" id="pricing">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Тарифы</p>
               <h2>Выберите свой формат участия</h2>
             </div>
 
@@ -1229,7 +1223,6 @@ export default function Home() {
                 <img src="images/portfolio_growth.jpeg" alt="Финансовая свобода" className="final-img" width="500" height="340" loading="lazy" />
               </div>
               <div className="final-copy">
-                <p className="section-kicker" style={{ color: "var(--orange)" }}>Финальный шаг</p>
                 <h2>Вы уже знаете, что хотите большего.<br />Осталось — начать.</h2>
                 <p className="final-text">Вы можете продолжать откладывать. А можете через 8 недель защитить свой первый инвестиционный портфель, собранный по системе, с инструментами, которые останутся с вами на годы.</p>
                 <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary final-cta" id="final-cta-btn">Выбрать тариф и начать обучение →</a>

@@ -1074,6 +1074,7 @@ summary {
    ========================================= */
 .howitworks-section {
     background: linear-gradient(180deg, #ffffff, #f8f3ed);
+    padding-top: 40px;
 }
 
 .hiw-grid {
@@ -1404,6 +1405,7 @@ summary {
    ========================================= */
 .experts-section {
     background: linear-gradient(180deg, #ffffff 0%, #f8f3ed 100%);
+    padding-top: 40px;
 }
 
 .experts-grid {
