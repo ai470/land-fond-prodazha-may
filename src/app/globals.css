@@ -835,10 +835,8 @@ summary {
 }
 
 .forwhom-card {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 0;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 28px;
@@ -846,10 +844,6 @@ summary {
     backdrop-filter: blur(10px);
     box-shadow: 0 28px 70px rgba(0, 18, 28, 0.18);
     transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
-}
-
-.forwhom-card:nth-child(even) {
-    grid-template-columns: 1.2fr 0.8fr;
 }
 
 .forwhom-card:hover {
@@ -860,18 +854,24 @@ summary {
 
 .forwhom-img-wrap {
     overflow: hidden;
-    padding: 12px;
+    padding: 16px 16px 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 200px;
+    flex-shrink: 0;
 }
 
 .forwhom-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: 18px;
     transition: transform 0.45s ease;
+}
+
+.forwhom-card:nth-child(3) .forwhom-img {
+    object-position: center 80%;
 }
 
 .forwhom-card:hover .forwhom-img {
@@ -2394,14 +2394,6 @@ summary {
         min-height: 160px;
     }
 
-    .forwhom-card {
-        grid-template-columns: 1fr;
-    }
-
-    .forwhom-card:nth-child(even) .forwhom-img-wrap {
-        order: -1;
-    }
-
     .hiw-grid {
         grid-template-columns: 1fr;
     }
@@ -2432,6 +2424,19 @@ summary {
 
     .section-head h2 {
         font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+    }
+
+    .forwhom-body {
+        text-align: center;
+        align-items: center;
+    }
+
+    .forwhom-num {
+        margin-inline: auto;
+    }
+
+    .forwhom-after {
+        text-align: center;
     }
 
     .hero-section {
@@ -2508,10 +2513,7 @@ summary {
         padding: 24px;
     }
 
-    .pricing-featured-badge {
-        top: 16px;
-        right: 16px;
-    }
+
 
     .bonus-modules {
         padding: 28px 22px;
