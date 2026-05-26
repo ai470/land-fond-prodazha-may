@@ -53,8 +53,8 @@ const forWhomData = [
   {
     num: "01",
     title: "Тревога за семью",
-    desc: "Вы хотите финансовую опору для семьи, а не жизнь от зарплаты до зарплаты.",
-    after: "У вас будет система, которая превращает часть дохода в растущий капитал. Не «когда-нибудь потом», а по конкретному плану.",
+    desc: <>Вы хотите финансовую опору для семьи, а не жизнь от зарплаты <br />до зарплаты.</>,
+    after: <>У вас будет система, которая превращает часть дохода в растущий капитал. Не «когда-нибудь потом», <br />а по конкретному плану.</>,
     img: "images/target_1.jpeg",
   },
   {
@@ -68,14 +68,14 @@ const forWhomData = [
     num: "03",
     title: "Финансовый хаос",
     desc: "Деньги приходят, но системы нет — и вы чувствуете, что теряете контроль.",
-    after: "Вместо хаоса — система. Вместо тревоги — план. Вместо «что делать с деньгами» — работающий портфель.",
+    after: <>Вместо хаоса — система. Вместо тревоги — план. Вместо «что делать <br />с деньгами» — работающий портфель.</>,
     img: "images/target_3.jpeg",
   },
   {
     num: "04",
     title: "Есть опыт, нет системы",
     desc: "Вы уже инвестируете, но без стратегии — покупаете по интуиции, реагируете на новости.",
-    after: "Вы пересоберёте портфель по системе — с обоснованием каждой позиции и протоколами на случай паники.",
+    after: <>Вы пересоберёте портфель по системе — с обоснованием каждой позиции <br />и протоколами на случай паники.</>,
     img: "images/target_4.jpeg",
   },
 ];
@@ -87,8 +87,8 @@ const toolsData = [
   { num: "04", title: "3 скринера инструментов", desc: "Облигации, акции, фонды — фильтруйте тысячи бумаг за 15 минут." },
   { num: "05", title: "Карточки анализа", desc: "Структурированная оценка каждого инструмента перед покупкой." },
   { num: "06", title: "Матрица личных рисков", desc: "4 оси оценки: финансовые, поведенческие, внешние, технические." },
-  { num: "07", title: "8 чек-листов и протоколов", desc: "«Анти-паника», «Анти-FOMO», «Ребалансировка» — правила на случай эмоций." },
-  { num: "08", title: "Готовый инвестиционный портфель", desc: "Структура под вашу цель: инструменты, пропорции, правила пересмотра." },
+  { num: "07", title: "8 чек-листов и протоколов", desc: "«Анти-паника», «Анти-FOMO», «Ребалансировка» — правила игры на случай, когда эмоции хотят их нарушить." },
+  { num: "08", title: "Сможете собрать инвестиционный портфель", desc: "Структура портфеля под вашу цель: какие инструменты рассмотреть, в каких пропорциях распределить и по каким правилам пересматривать." },
   { num: "09", title: "Налоговая схема", desc: "Какой вычет положен, когда подавать декларацию, как законно сохранить максимум." },
   { num: "10", title: "Дорожная карта развития", desc: "Ваш план на 6–12 месяцев после программы." },
 ];
@@ -300,9 +300,9 @@ const GetCourseWidget: React.FC<GetCourseWidgetProps> = ({ scriptId, widgetId })
   const containerHeight = Math.max(380, iframeHeight - 40);
 
   return (
-    <div 
+    <div
       className={`gc-widget-container ${loaded ? "loaded" : "loading"}`}
-      style={{ 
+      style={{
         height: loaded ? `${containerHeight}px` : "380px",
         minHeight: loaded ? `${containerHeight}px` : "380px",
       }}
@@ -506,6 +506,11 @@ export default function Home() {
                 Соберите свой первый инвестиционный портфель за 8 недель — с системой, инструментами и поддержкой экспертов
               </p>
 
+              <div className="hero-actions">
+                <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary hero-cta" id="hero-cta-btn">Выбрать тариф →</a>
+                <p className="hero-note">Рассрочка — от 5&nbsp;999&nbsp;₽/мес.</p>
+              </div>
+
               <ul className="hero-stats">
                 <li>
                   <span className="stat-icon">
@@ -532,14 +537,9 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </span>
-                  <div><strong>Сертификат</strong><span>установленного образца по прохождению программы</span></div>
+                  <div><strong>Свидетельство</strong><span> об обучении  по прохождению программы</span></div>
                 </li>
               </ul>
-
-              <div className="hero-actions">
-                <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary hero-cta" id="hero-cta-btn">Выбрать тариф →</a>
-                <p className="hero-note">Рассрочка — от 5&nbsp;999&nbsp;₽/мес.</p>
-              </div>
             </div>
 
             <div className="hero-visual">
@@ -570,34 +570,70 @@ export default function Home() {
         {/* ===== TICKER ===== */}
         <div className="ticker-wrap" aria-hidden="true">
           <div className="ticker-track">
-            <span>Первый поток</span>
-            <span className="sep">·</span>
-            <span>8 модулей</span>
-            <span className="sep">·</span>
-            <span>46 уроков</span>
-            <span className="sep">·</span>
-            <span>10 инструментов</span>
-            <span className="sep">·</span>
-            <span>Старт 8 июня</span>
-            <span className="sep">·</span>
-            <span>Рассрочка 0%</span>
-            <span className="sep">·</span>
-            <span>Сертификат</span>
-            <span className="sep">·</span>
-            <span>Первый поток</span>
-            <span className="sep">·</span>
-            <span>8 модулей</span>
-            <span className="sep">·</span>
-            <span>46 уроков</span>
-            <span className="sep">·</span>
-            <span>10 инструментов</span>
-            <span className="sep">·</span>
-            <span>Старт 8 июня</span>
-            <span className="sep">·</span>
-            <span>Рассрочка 0%</span>
-            <span className="sep">·</span>
-            <span>Сертификат</span>
-            <span className="sep">·</span>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
           </div>
         </div>
 
@@ -605,7 +641,6 @@ export default function Home() {
         <section className="section timeline-section reveal-section" id="about">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Результат недели за неделей</p>
               <h2>За 8 недель вы пройдёте путь<br />от «не знаю, с чего начать»<br />до <span className="heading-accent">собственного портфеля</span></h2>
               <p>Это не набор лекций. Каждый модуль заканчивается конкретным результатом — документом, инструментом, решением.</p>
             </div>
@@ -646,7 +681,6 @@ export default function Home() {
           <div className="container">
             <div className="section-head section-head-light">
               <h2>Эта программа — для вас, если</h2>
-              <p>Не важно, сколько вам лет, какой у вас доход и есть ли опыт. Важно — что вы чувствуете прямо сейчас.</p>
             </div>
 
             <div className="forwhom-grid">
@@ -1039,7 +1073,7 @@ export default function Home() {
               </article>
 
               <article className="pricing-card pricing-card-featured reveal-item" id="tarif-portfolio">
-                <div className="pricing-featured-badge">Популярный</div>
+                <div className="pricing-featured-badge">Хит продаж</div>
                 <div className="pricing-card-head">
                   <h3>Портфель</h3>
                   <p className="pricing-card-desc">Для тех, кто хочет собрать и проверить свою стратегию</p>
@@ -1079,6 +1113,7 @@ export default function Home() {
               </article>
 
               <article className="pricing-card reveal-item" id="tarif-capital">
+                <div className="pricing-featured-badge">Рекомендуемый</div>
                 <div className="pricing-card-head">
                   <h3>Капитал</h3>
                   <p className="pricing-card-desc">Для тех, кто строит финансовую систему на годы</p>
