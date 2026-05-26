@@ -9,42 +9,42 @@ const timelineData = [
     week: "01–02",
     title: "Фундамент",
     text: "Сформулируете финансовую цель, определите свой риск-профиль и составите инвестиционный план на одной странице.",
-    img: "/images/week_foundation.jpeg",
+    img: "/kurs/images/week_foundation.jpeg",
     scaleSm: false,
   },
   {
     week: "02–03",
     title: "Инфраструктура",
     text: "Разберётесь, как устроен рынок, выберете брокера и совершите первые учебные сделки без риска.",
-    img: "/images/tools_visual.jpeg",
+    img: "/kurs/images/tools_visual.jpeg",
     scaleSm: false,
   },
   {
     week: "03–04",
     title: "Облигации",
     text: "Научитесь отбирать облигации, считать реальную доходность и формировать консервативную часть портфеля.",
-    img: "/images/bonds_section.jpeg",
+    img: "/kurs/images/bonds_section.jpeg",
     scaleSm: true,
   },
   {
     week: "04–06",
     title: "Акции, фонды и альтернативы",
     text: "Освоите фундаментальный анализ компаний, научитесь сравнивать акции и выбирать фонды.",
-    img: "/images/stocks_analysis.jpeg",
+    img: "/kurs/images/stocks_analysis.jpeg",
     scaleSm: false,
   },
   {
     week: "06–07",
     title: "Управление портфелем",
     text: "Соберёте все активы в единую структуру, настроите правила ребалансировки и разберётесь с налогами.",
-    img: "/images/portfolio_protection.jpeg",
+    img: "/kurs/images/portfolio_protection.jpeg",
     scaleSm: true,
   },
   {
     week: "08",
     title: "Защита стратегии",
     text: "Оформите итоговый портфель, защитите его перед экспертом. Уйдёте с готовым планом и дорожной картой развития.",
-    img: "/images/certificate_mockup.jpeg",
+    img: "/kurs/images/certificate_mockup.jpeg",
     scaleSm: true,
   },
 ];
@@ -55,28 +55,28 @@ const forWhomData = [
     title: "Тревога за семью",
     desc: "Вы хотите финансовую опору для семьи, а не жизнь от зарплаты до зарплаты.",
     after: "У вас будет система, которая превращает часть дохода в растущий капитал. Не «когда-нибудь потом», а по конкретному плану.",
-    img: "/images/target_card.jpeg",
+    img: "/kurs/images/target_card.jpeg",
   },
   {
     num: "02",
     title: "Тревога о будущем",
     desc: "Вы понимаете, что на одну пенсию жить не получится — и хотите успеть создать капитал.",
     after: "Вы будете знать, сколько нужно откладывать, куда направлять и как защитить то, что уже есть.",
-    img: "/images/portfolio_growth.jpeg",
+    img: "/kurs/images/portfolio_growth.jpeg",
   },
   {
     num: "03",
     title: "Финансовый хаос",
     desc: "Деньги приходят, но системы нет — и вы чувствуете, что теряете контроль.",
     after: "Вместо хаоса — система. Вместо тревоги — план. Вместо «что делать с деньгами» — работающий портфель.",
-    img: "/images/tools_visual.jpeg",
+    img: "/kurs/images/tools_visual.jpeg",
   },
   {
     num: "04",
     title: "Есть опыт, нет системы",
     desc: "Вы уже инвестируете, но без стратегии — покупаете по интуиции, реагируете на новости.",
     after: "Вы пересоберёте портфель по системе — с обоснованием каждой позиции и протоколами на случай паники.",
-    img: "/images/stocks_analysis.jpeg",
+    img: "/kurs/images/stocks_analysis.jpeg",
   },
 ];
 
@@ -440,7 +440,7 @@ export default function Home() {
             <div className="hero-visual">
               <div className="hero-chart-wrap">
                 <img
-                  src="/images/tatyana_hero.png"
+                  src="/kurs/images/tatyana_hero.png"
                   alt="Татьяна Волкова — эксперт по формированию личного капитала"
                   className="hero-chart-img"
                   width="580"
@@ -618,7 +618,7 @@ export default function Home() {
               </div>
 
               <div className="tools-visual reveal-item">
-                <img src="/images/tools_visual.jpeg" alt="10 инструментов инвестора" className="tools-img" width="540" height="480" loading="lazy" />
+                <img src="/kurs/images/tools_visual.jpeg" alt="10 инструментов инвестора" className="tools-img" width="540" height="480" loading="lazy" />
                 <div className="tools-accent-card">
                   <strong>Программа заканчивается.<br />Инфраструктура — остаётся.</strong>
                   <p>Дорабатывайте, масштабируйте и используйте эти инструменты годами.</p>
@@ -817,7 +817,7 @@ export default function Home() {
             <div className="experts-grid">
               <article className="expert-card reveal-item">
                 <div className="expert-photo-wrap">
-                  <img src="/images/speaker_tatyana.webp" alt="Татьяна Волкова" className="expert-photo" width="200" height="240" loading="lazy" />
+                  <img src="/kurs/images/speaker_tatyana.webp" alt="Татьяна Волкова" className="expert-photo" width="200" height="240" loading="lazy" />
                 </div>
                 <div className="expert-body">
                   <h3>Татьяна Волкова</h3>
@@ -842,7 +842,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <div className="expert-photo-wrap">
-                  <img src="/images/polina-speaker.png" alt="Полина Брежестовская" className="expert-photo" width="200" height="240" loading="lazy" />
+                  <img src="/kurs/images/polina-speaker.png" alt="Полина Брежестовская" className="expert-photo" width="200" height="240" loading="lazy" />
                 </div>
               </article>
             </div>
@@ -1115,7 +1115,7 @@ export default function Home() {
           <div className="container">
             <div className="final-panel reveal-item">
               <div className="final-visual">
-                <img src="/images/portfolio_growth.jpeg" alt="Финансовая свобода" className="final-img" width="500" height="340" loading="lazy" />
+                <img src="/kurs/images/portfolio_growth.jpeg" alt="Финансовая свобода" className="final-img" width="500" height="340" loading="lazy" />
               </div>
               <div className="final-copy">
                 <p className="section-kicker" style={{ color: "var(--orange)" }}>Финальный шаг</p>
