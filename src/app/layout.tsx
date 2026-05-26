@@ -1,12 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
 import "./globals.css";
-
-const manrope = Manrope({
-  subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-manrope",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -26,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" style={{ scrollBehavior: "smooth" }}>
-      <body className={`${manrope.variable}`}>
+      <body>
         {children}
       </body>
     </html>

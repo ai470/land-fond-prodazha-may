@@ -9,42 +9,42 @@ const timelineData = [
     week: "01–02",
     title: "Фундамент",
     text: "Сформулируете финансовую цель, определите свой риск-профиль и составите инвестиционный план на одной странице.",
-    img: "/kurs/images/week_foundation.jpeg",
+    img: "images/week_foundation.jpeg",
     scaleSm: false,
   },
   {
     week: "02–03",
     title: "Инфраструктура",
     text: "Разберётесь, как устроен рынок, выберете брокера и совершите первые учебные сделки без риска.",
-    img: "/kurs/images/tools_visual.jpeg",
+    img: "images/tools_visual.jpeg",
     scaleSm: false,
   },
   {
     week: "03–04",
     title: "Облигации",
     text: "Научитесь отбирать облигации, считать реальную доходность и формировать консервативную часть портфеля.",
-    img: "/kurs/images/bonds_section.jpeg",
+    img: "images/bonds_section.jpeg",
     scaleSm: true,
   },
   {
     week: "04–06",
     title: "Акции, фонды и альтернативы",
     text: "Освоите фундаментальный анализ компаний, научитесь сравнивать акции и выбирать фонды.",
-    img: "/kurs/images/stocks_analysis.jpeg",
+    img: "images/stocks_analysis.jpeg",
     scaleSm: false,
   },
   {
     week: "06–07",
     title: "Управление портфелем",
     text: "Соберёте все активы в единую структуру, настроите правила ребалансировки и разберётесь с налогами.",
-    img: "/kurs/images/portfolio_protection.jpeg",
+    img: "images/portfolio_protection.jpeg",
     scaleSm: true,
   },
   {
     week: "08",
     title: "Защита стратегии",
     text: "Оформите итоговый портфель, защитите его перед экспертом. Уйдёте с готовым планом и дорожной картой развития.",
-    img: "/kurs/images/certificate_mockup.jpeg",
+    img: "images/certificate_mockup.jpeg",
     scaleSm: true,
   },
 ];
@@ -55,28 +55,28 @@ const forWhomData = [
     title: "Тревога за семью",
     desc: "Вы хотите финансовую опору для семьи, а не жизнь от зарплаты до зарплаты.",
     after: "У вас будет система, которая превращает часть дохода в растущий капитал. Не «когда-нибудь потом», а по конкретному плану.",
-    img: "/kurs/images/target_card.jpeg",
+    img: "images/target_card.jpeg",
   },
   {
     num: "02",
     title: "Тревога о будущем",
     desc: "Вы понимаете, что на одну пенсию жить не получится — и хотите успеть создать капитал.",
     after: "Вы будете знать, сколько нужно откладывать, куда направлять и как защитить то, что уже есть.",
-    img: "/kurs/images/portfolio_growth.jpeg",
+    img: "images/portfolio_growth.jpeg",
   },
   {
     num: "03",
     title: "Финансовый хаос",
     desc: "Деньги приходят, но системы нет — и вы чувствуете, что теряете контроль.",
     after: "Вместо хаоса — система. Вместо тревоги — план. Вместо «что делать с деньгами» — работающий портфель.",
-    img: "/kurs/images/tools_visual.jpeg",
+    img: "images/tools_visual.jpeg",
   },
   {
     num: "04",
     title: "Есть опыт, нет системы",
     desc: "Вы уже инвестируете, но без стратегии — покупаете по интуиции, реагируете на новости.",
     after: "Вы пересоберёте портфель по системе — с обоснованием каждой позиции и протоколами на случай паники.",
-    img: "/kurs/images/stocks_analysis.jpeg",
+    img: "images/stocks_analysis.jpeg",
   },
 ];
 
@@ -264,12 +264,118 @@ const faqsData = [
   },
 ];
 
+interface GetCourseWidgetProps {
+  scriptId: string;
+  widgetId: string;
+}
+
+const GetCourseWidget: React.FC<GetCourseWidgetProps> = ({ scriptId, widgetId }) => {
+  const [src, setSrc] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  const [iframeHeight, setIframeHeight] = useState(620); // Increased robust default height
+
+  useEffect(() => {
+    const search = window.location.search ? window.location.search.substring(1) + "&" : "";
+    const ref = encodeURIComponent(document.referrer || "");
+    const loc = encodeURIComponent(window.location.href);
+    setSrc(`https://monterium.ru/pl/lite/widget/widget?${search}id=${widgetId}&ref=${ref}&loc=${loc}`);
+  }, [widgetId]);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data && typeof e.data === "object" && e.data.height) {
+        if (!e.data.uniqName || e.data.uniqName === scriptId) {
+          setIframeHeight(Number(e.data.height));
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [scriptId]);
+
+  if (!src) return null;
+
+  // We hide the empty GetCourse top margin by offsetting with marginTop: -45px.
+  const containerHeight = Math.max(380, iframeHeight - 40);
+
+  return (
+    <div 
+      className={`gc-widget-container ${loaded ? "loaded" : "loading"}`}
+      style={{ 
+        height: loaded ? `${containerHeight}px` : "380px",
+        minHeight: loaded ? `${containerHeight}px` : "380px",
+      }}
+    >
+      <iframe
+        src={src}
+        onLoad={() => setLoaded(true)}
+        style={{
+          width: "100%",
+          height: `${iframeHeight}px`,
+          marginTop: "-45px",
+          border: "none",
+          overflow: "hidden",
+          opacity: loaded ? 1 : 0,
+          transition: "opacity 0.3s ease", // Instant height resizing (no delay!)
+        }}
+        allowFullScreen
+      />
+    </div>
+  );
+};
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [countdownText, setCountdownText] = useState("Старт потока — 8 июня");
   const [activeModule, setActiveModule] = useState<number | null>(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [activeTariffPopup, setActiveTariffPopup] = useState<{
+    id: string;
+    widgetId: string;
+    scriptId: string;
+    title: string;
+    price: string;
+  } | null>(null);
+
+  const openTariffPopup = (tariffName: string) => {
+    const tariffs: { [key: string]: any } = {
+      start: {
+        id: "start",
+        widgetId: "1609026",
+        scriptId: "4a23c25c88911c4011ff1ea03b9d807045faf436",
+        title: "Тариф «Старт»",
+        price: "59 990 ₽",
+      },
+      practice: {
+        id: "practice",
+        widgetId: "1609027",
+        scriptId: "60cc6ad32208dedb2c6ae368ac14956c4da2f648",
+        title: "Тариф «Практика»",
+        price: "89 990 ₽",
+      },
+      portfolio: {
+        id: "portfolio",
+        widgetId: "1609028",
+        scriptId: "1df9737ee68214aec42e5ce52631bc3d37b6c62d",
+        title: "Тариф «Портфель»",
+        price: "119 990 ₽",
+      },
+      capital: {
+        id: "capital",
+        widgetId: "1609031",
+        scriptId: "fe4c481df796c329c9d190e90ec408b78e779cfe",
+        title: "Тариф «Капитал»",
+        price: "149 990 ₽",
+      },
+    };
+
+    const t = tariffs[tariffName];
+    if (t) {
+      setActiveTariffPopup(t);
+    }
+  };
 
   // Scroll handler for header background
   useEffect(() => {
@@ -352,7 +458,6 @@ export default function Home() {
       <header className={`site-header ${scrolled ? "scrolled" : ""}`} id="site-header">
         <div className="container header-inner">
           <div className="header-logo">
-            <span className="logo-badge">МЭ</span>
             <span className="logo-name">Монтериум</span>
           </div>
           <nav className="header-nav" aria-label="Навигация">
@@ -396,7 +501,7 @@ export default function Home() {
                 <span>8 недель</span>
                 <span>Онлайн</span>
               </div>
-              <h1>«Портфель<br />на фондовом<br />рынке»</h1>
+              <h1>«Портфель на&nbsp;фондовом рынке»</h1>
               <p className="hero-subtitle">
                 Соберите свой первый инвестиционный портфель за 8 недель — с системой, инструментами и поддержкой экспертов
               </p>
@@ -440,7 +545,7 @@ export default function Home() {
             <div className="hero-visual">
               <div className="hero-chart-wrap">
                 <img
-                  src="/kurs/images/tatyana_hero.png"
+                  src="images/tatyana_hero.png"
                   alt="Татьяна Волкова — эксперт по формированию личного капитала"
                   className="hero-chart-img"
                   width="580"
@@ -587,7 +692,7 @@ export default function Home() {
               70&nbsp;000+ учеников уже прошли этот путь. Среди них — те, кто начинал точно с такими же сомнениями, как у вас.
             </p>
             <div className="forwhom-cta-wrap reveal-item">
-              <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-light" id="forwhom-cta-btn">Забронировать место в потоке →</a>
+              <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary" id="forwhom-cta-btn">Забронировать место в потоке →</a>
             </div>
           </div>
         </section>
@@ -618,7 +723,7 @@ export default function Home() {
               </div>
 
               <div className="tools-visual reveal-item">
-                <img src="/kurs/images/tools_visual.jpeg" alt="10 инструментов инвестора" className="tools-img" width="540" height="480" loading="lazy" />
+                <img src="images/tools_visual.jpeg" alt="10 инструментов инвестора" className="tools-img" width="540" height="480" loading="lazy" />
                 <div className="tools-accent-card">
                   <strong>Программа заканчивается.<br />Инфраструктура — остаётся.</strong>
                   <p>Дорабатывайте, масштабируйте и используйте эти инструменты годами.</p>
@@ -642,8 +747,10 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <h3>Личный кабинет</h3>
-                <p>Доступ к урокам в личном кабинете на GetCourse. Учитесь в удобном темпе.</p>
+                <div className="hiw-content">
+                  <h3>Личный кабинет</h3>
+                  <p>Доступ к урокам в личном кабинете на GetCourse. Учитесь в удобном темпе.</p>
+                </div>
               </div>
               <div className="hiw-card reveal-item">
                 <span className="hiw-icon">
@@ -651,8 +758,10 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <h3>Видеоуроки</h3>
-                <p>15–20 минут каждый. Конспекты, презентации и практические задания в каждом модуле.</p>
+                <div className="hiw-content">
+                  <h3>Видеоуроки</h3>
+                  <p>15–20 минут каждый. Конспекты, презентации и практические задания в каждом модуле.</p>
+                </div>
               </div>
               <div className="hiw-card reveal-item">
                 <span className="hiw-icon">
@@ -660,8 +769,10 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                   </svg>
                 </span>
-                <h3>Доп. материалы</h3>
-                <p>Шаблоны, чек-листы, калькуляторы (Excel), сравнительные таблицы в подарок.</p>
+                <div className="hiw-content">
+                  <h3>Доп. материалы</h3>
+                  <p>Шаблоны, чек-листы, калькуляторы (Excel), сравнительные таблицы в подарок.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -817,7 +928,7 @@ export default function Home() {
             <div className="experts-grid">
               <article className="expert-card reveal-item">
                 <div className="expert-photo-wrap">
-                  <img src="/kurs/images/speaker_tatyana.webp" alt="Татьяна Волкова" className="expert-photo" width="200" height="240" loading="lazy" />
+                  <img src="images/speaker_tatyana.webp" alt="Татьяна Волкова" className="expert-photo" width="200" height="240" loading="lazy" />
                 </div>
                 <div className="expert-body">
                   <h3>Татьяна Волкова</h3>
@@ -842,7 +953,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <div className="expert-photo-wrap">
-                  <img src="/kurs/images/polina-speaker.png" alt="Полина Брежестовская" className="expert-photo" width="200" height="240" loading="lazy" />
+                  <img src="images/polina-speaker.png" alt="Полина Брежестовская" className="expert-photo" width="200" height="240" loading="lazy" />
                 </div>
               </article>
             </div>
@@ -892,9 +1003,9 @@ export default function Home() {
                   <li>Тестирования по модулю</li>
                 </ul>
                 <div className="pricing-installment">
-                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-start-btn">Начать обучение →</a>
+                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-start-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("start"); }}>Начать обучение →</a>
                   <p className="installment-note">Рассрочка 0% — от <strong>5&nbsp;999 ₽</strong>/мес · от 200 ₽ в день</p>
-                  <a href="#" className="cta-installment-link" id="tarif-start-inst-btn">Выбрать рассрочку →</a>
+                  <a href="#" className="cta-installment-link" id="tarif-start-inst-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("start"); }}>Выбрать рассрочку →</a>
                 </div>
               </article>
 
@@ -927,9 +1038,9 @@ export default function Home() {
                   <li>Домашние задания с проверкой</li>
                 </ul>
                 <div className="pricing-installment">
-                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-practice-btn">Начать обучение →</a>
+                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-practice-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("practice"); }}>Начать обучение →</a>
                   <p className="installment-note">Рассрочка 0% — от <strong>8&nbsp;999 ₽</strong>/мес · от 300 ₽ в день</p>
-                  <a href="#" className="cta-installment-link" id="tarif-practice-inst-btn">Выбрать рассрочку →</a>
+                  <a href="#" className="cta-installment-link" id="tarif-practice-inst-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("practice"); }}>Выбрать рассрочку →</a>
                 </div>
               </article>
 
@@ -967,9 +1078,9 @@ export default function Home() {
                   <li>Домашние задания с проверкой</li>
                 </ul>
                 <div className="pricing-installment">
-                  <a href="#" className="cta cta-light pricing-cta" id="tarif-portfolio-btn">Начать обучение →</a>
+                  <a href="#" className="cta cta-light pricing-cta" id="tarif-portfolio-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("portfolio"); }}>Начать обучение →</a>
                   <p className="installment-note">Рассрочка 0% — от <strong>11&nbsp;999 ₽</strong>/мес · от 400 ₽ в день</p>
-                  <a href="#" className="cta-installment-link cta-installment-link-light" id="tarif-portfolio-inst-btn">Выбрать рассрочку →</a>
+                  <a href="#" className="cta-installment-link cta-installment-link-light" id="tarif-portfolio-inst-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("portfolio"); }}>Выбрать рассрочку →</a>
                 </div>
               </article>
 
@@ -1006,9 +1117,9 @@ export default function Home() {
                   <li>Домашние задания с проверкой</li>
                 </ul>
                 <div className="pricing-installment">
-                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-capital-btn">Начать обучение →</a>
+                  <a href="#" className="cta cta-primary pricing-cta" id="tarif-capital-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("capital"); }}>Начать обучение →</a>
                   <p className="installment-note">Рассрочка 0% — от <strong>14&nbsp;999 ₽</strong>/мес · от 500 ₽ в день</p>
-                  <a href="#" className="cta-installment-link" id="tarif-capital-inst-btn">Выбрать рассрочку →</a>
+                  <a href="#" className="cta-installment-link" id="tarif-capital-inst-btn" onClick={(e) => { e.preventDefault(); openTariffPopup("capital"); }}>Выбрать рассрочку →</a>
                 </div>
               </article>
             </div>
@@ -1115,7 +1226,7 @@ export default function Home() {
           <div className="container">
             <div className="final-panel reveal-item">
               <div className="final-visual">
-                <img src="/kurs/images/portfolio_growth.jpeg" alt="Финансовая свобода" className="final-img" width="500" height="340" loading="lazy" />
+                <img src="images/portfolio_growth.jpeg" alt="Финансовая свобода" className="final-img" width="500" height="340" loading="lazy" />
               </div>
               <div className="final-copy">
                 <p className="section-kicker" style={{ color: "var(--orange)" }}>Финальный шаг</p>
@@ -1189,6 +1300,27 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {activeTariffPopup && (
+        <div className="modal-overlay" onClick={() => setActiveTariffPopup(null)}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <div className="modal-header-title-wrap">
+                <h3>Регистрация на курс</h3>
+                <span className="modal-subtitle">{activeTariffPopup.title} · {activeTariffPopup.price}</span>
+              </div>
+              <button className="modal-close-btn" onClick={() => setActiveTariffPopup(null)} aria-label="Закрыть">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="modal-close-svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="modal-body">
+              <GetCourseWidget scriptId={activeTariffPopup.scriptId} widgetId={activeTariffPopup.widgetId} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
