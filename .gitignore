@@ -15,4 +15,4 @@ node_modules/
 Thumbs.db
 
 # Local environment variables
-.env*.local
+.env*.local 
