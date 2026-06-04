@@ -654,7 +654,11 @@ export default function Home() {
         <section className="hero-section" id="home">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <p className="hero-eyebrow">Старт обучения <strong>8 июня</strong> · Количество мест ограничено</p>
+              <p className="hero-eyebrow">
+                <span>Старт обучения <strong>8 июня</strong></span>
+                <span className="hero-eyebrow-separator">·</span>
+                <span>Количество мест ограничено</span>
+              </p>
               <div className="hero-badges">
                 <span className="hero-format">Образовательная программа</span>
                 <span>8 недель</span>

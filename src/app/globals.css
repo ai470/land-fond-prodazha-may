@@ -385,12 +385,34 @@ summary {
 }
 
 .hero-eyebrow {
+    display: inline-flex;
+    width: fit-content;
     max-width: 560px;
+    min-height: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
     margin: 0 0 18px;
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 1rem;
-    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: rgba(1, 51, 76, 0.46);
+    color: var(--white);
+    font-size: 0.92rem;
+    font-weight: 850;
+    line-height: 1.2;
+    box-shadow: 0 14px 34px rgba(1, 51, 76, 0.18);
+    backdrop-filter: blur(12px);
     animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.hero-eyebrow strong {
+    color: #ffd7b5;
+    font-weight: 950;
+}
+
+.hero-eyebrow-separator {
+    color: rgba(255, 255, 255, 0.58);
 }
 
 .hero-badges {
