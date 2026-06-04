@@ -264,6 +264,41 @@ const faqsData = [
   },
 ];
 
+const broadcastReplays = [
+  {
+    num: "01",
+    status: "Эфир в записи",
+    title: "Новые законы с 1 июня 2026 — точка финансовых изменений",
+    embedUrl: "https://rutube.ru/play/embed/ae25057010bb74eda7d581ea1da5bfef/?p=axPg8IyJzoEcLBg02bzy8Q",
+    sourceUrl: "https://rutube.ru/video/private/ae25057010bb74eda7d581ea1da5bfef/?p=axPg8IyJzoEcLBg02bzy8Q",
+  },
+  {
+    num: "02",
+    status: "Эфир в записи",
+    title: "Деньги тают на глазах",
+    embedUrl: "https://rutube.ru/play/embed/7f8420a57e77af00c8fdad3530dd4266/?p=O-QgEL7-uOZ27ESrzKZ5YQ",
+    sourceUrl: "https://rutube.ru/video/private/7f8420a57e77af00c8fdad3530dd4266/?p=O-QgEL7-uOZ27ESrzKZ5YQ",
+  },
+];
+
+const broadcastDeadline = new Date("2026-06-06T23:59:00+03:00").getTime();
+
+const getBroadcastCountdown = () => {
+  const diff = Math.max(0, broadcastDeadline - Date.now());
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  return {
+    expired: diff <= 0,
+    days: String(days).padStart(2, "0"),
+    hours: String(hours).padStart(2, "0"),
+    minutes: String(minutes).padStart(2, "0"),
+    seconds: String(seconds).padStart(2, "0"),
+  };
+};
+
 interface GetCourseWidgetProps {
   scriptId: string;
   widgetId: string;
@@ -348,6 +383,13 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [countdownText, setCountdownText] = useState("Старт потока — 8 июня");
+  const [broadcastCountdown, setBroadcastCountdown] = useState({
+    expired: false,
+    days: "00",
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
+  });
   const [activeModule, setActiveModule] = useState<number | null>(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [shouldLoadWidgets, setShouldLoadWidgets] = useState(false);
@@ -460,6 +502,16 @@ export default function Home() {
 
     updateCountdown();
     const interval = setInterval(updateCountdown, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      setBroadcastCountdown(getBroadcastCountdown());
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -612,6 +664,66 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== BROADCAST REPLAYS ===== */}
+        <section className="section broadcasts-section reveal-section" id="broadcasts">
+          <div className="container">
+            <div className="broadcast-countdown reveal-item" aria-label="Таймер до 6 июня 2026, 23:59 по Москве">
+              <div className="broadcast-countdown-copy">
+                <span className="broadcast-countdown-kicker">Эфиры доступны сейчас</span>
+                <strong>{broadcastCountdown.expired ? "Таймер завершён" : "До окончания доступа к эфирам"}</strong>
+                <p>Доступно до: 6 июня 2026, 23:59 МСК</p>
+              </div>
+              <div className="broadcast-countdown-grid" aria-hidden={broadcastCountdown.expired}>
+                <span><strong>{broadcastCountdown.days}</strong><small>дней</small></span>
+                <span><strong>{broadcastCountdown.hours}</strong><small>часов</small></span>
+                <span><strong>{broadcastCountdown.minutes}</strong><small>минут</small></span>
+                <span><strong>{broadcastCountdown.seconds}</strong><small>секунд</small></span>
+              </div>
+            </div>
+
+            <div className="section-head broadcasts-head">
+              <p className="section-kicker">Записи эфиров</p>
+              <h2>Посмотрите разборы до старта обучения</h2>
+              <p>Собрали актуальные эфиры в одном месте: начните с них, чтобы увидеть логику программы и подготовиться к первому модулю.</p>
+            </div>
+
+            <div className="broadcasts-grid">
+              {broadcastReplays.map((item) => (
+                <article key={item.num} className="broadcast-card reveal-item">
+                  <div className={`broadcast-player ${item.embedUrl ? "" : "broadcast-player-empty"}`}>
+                    {item.embedUrl ? (
+                      <iframe
+                        src={item.embedUrl}
+                        title={item.title}
+                        loading="lazy"
+                        allow="clipboard-write; autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <div className="broadcast-placeholder" aria-hidden="true">
+                        <span className="broadcast-play-mark"></span>
+                        <p>Запись будет добавлена сюда</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="broadcast-card-body">
+                    <div className="broadcast-card-top">
+                      <span className="broadcast-num">{item.num}</span>
+                      <span className="broadcast-status">{item.status}</span>
+                    </div>
+                    <h3>{item.title}</h3>
+                    {item.sourceUrl && (
+                      <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="broadcast-source-link">
+                        Открыть на RUTUBE →
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
