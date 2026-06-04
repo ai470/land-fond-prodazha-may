@@ -592,6 +592,64 @@ export default function Home() {
       </div>
 
       <main className="landing">
+        {/* ===== BROADCAST REPLAYS ===== */}
+        <section className="section broadcasts-section reveal-section" id="broadcasts">
+          <div className="container">
+            <div className="section-head broadcasts-head">
+              <h2>Запись эфира + все спецусловия — только 48 часов</h2>
+              <p>Мы сохранили для вас не только запись, но и все подарки и бонусные предложения, которые были доступны в прямом эфире. Через 48 часов и запись, и спецусловия исчезнут. Не откладывайте.</p>
+            </div>
+
+            <div className="broadcast-countdown reveal-item" aria-label="Таймер до 6 июня 2026, 23:59 по Москве">
+              <div className="broadcast-countdown-copy">
+                <span className="broadcast-countdown-kicker">Эфиры доступны сейчас</span>
+                <strong>{broadcastCountdown.expired ? "Таймер завершён" : "До окончания доступа к эфирам"}</strong>
+              </div>
+              <div className="broadcast-countdown-grid" aria-hidden={broadcastCountdown.expired}>
+                <span><strong>{broadcastCountdown.days}</strong><small>дней</small></span>
+                <span><strong>{broadcastCountdown.hours}</strong><small>часов</small></span>
+                <span><strong>{broadcastCountdown.minutes}</strong><small>минут</small></span>
+                <span><strong>{broadcastCountdown.seconds}</strong><small>секунд</small></span>
+              </div>
+            </div>
+
+            <div className="broadcasts-grid">
+              {broadcastReplays.map((item) => (
+                <article key={item.num} className="broadcast-card reveal-item">
+                  <div className={`broadcast-player ${item.embedUrl ? "" : "broadcast-player-empty"}`}>
+                    {item.embedUrl ? (
+                      <iframe
+                        src={item.embedUrl}
+                        title={item.title}
+                        loading="lazy"
+                        allow="clipboard-write; autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <div className="broadcast-placeholder" aria-hidden="true">
+                        <span className="broadcast-play-mark"></span>
+                        <p>Запись будет добавлена сюда</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="broadcast-card-body">
+                    <div className="broadcast-card-top">
+                      <span className="broadcast-num">{item.num}</span>
+                      <span className="broadcast-status">{item.status}</span>
+                    </div>
+                    <h3>{item.title}</h3>
+                    {item.sourceUrl && (
+                      <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="broadcast-source-link">
+                        Открыть на RUTUBE →
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ===== HERO ===== */}
         <section className="hero-section" id="home">
           <div className="container hero-grid">
@@ -664,65 +722,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ===== BROADCAST REPLAYS ===== */}
-        <section className="section broadcasts-section reveal-section" id="broadcasts">
-          <div className="container">
-            <div className="broadcast-countdown reveal-item" aria-label="Таймер до 6 июня 2026, 23:59 по Москве">
-              <div className="broadcast-countdown-copy">
-                <span className="broadcast-countdown-kicker">Эфиры доступны сейчас</span>
-                <strong>{broadcastCountdown.expired ? "Таймер завершён" : "До окончания доступа к эфирам"}</strong>
-              </div>
-              <div className="broadcast-countdown-grid" aria-hidden={broadcastCountdown.expired}>
-                <span><strong>{broadcastCountdown.days}</strong><small>дней</small></span>
-                <span><strong>{broadcastCountdown.hours}</strong><small>часов</small></span>
-                <span><strong>{broadcastCountdown.minutes}</strong><small>минут</small></span>
-                <span><strong>{broadcastCountdown.seconds}</strong><small>секунд</small></span>
-              </div>
-            </div>
-
-            <div className="section-head broadcasts-head">
-              <p className="section-kicker">Записи эфиров</p>
-              <h2>Посмотрите разборы до старта обучения</h2>
-              <p>Собрали актуальные эфиры в одном месте: начните с них, чтобы увидеть логику программы и подготовиться к первому модулю.</p>
-            </div>
-
-            <div className="broadcasts-grid">
-              {broadcastReplays.map((item) => (
-                <article key={item.num} className="broadcast-card reveal-item">
-                  <div className={`broadcast-player ${item.embedUrl ? "" : "broadcast-player-empty"}`}>
-                    {item.embedUrl ? (
-                      <iframe
-                        src={item.embedUrl}
-                        title={item.title}
-                        loading="lazy"
-                        allow="clipboard-write; autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                      />
-                    ) : (
-                      <div className="broadcast-placeholder" aria-hidden="true">
-                        <span className="broadcast-play-mark"></span>
-                        <p>Запись будет добавлена сюда</p>
-                      </div>
-                    )}
-                  </div>
-                  <div className="broadcast-card-body">
-                    <div className="broadcast-card-top">
-                      <span className="broadcast-num">{item.num}</span>
-                      <span className="broadcast-status">{item.status}</span>
-                    </div>
-                    <h3>{item.title}</h3>
-                    {item.sourceUrl && (
-                      <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="broadcast-source-link">
-                        Открыть на RUTUBE →
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
             </div>
           </div>
         </section>
