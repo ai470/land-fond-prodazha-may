@@ -675,7 +675,6 @@ export default function Home() {
               <div className="broadcast-countdown-copy">
                 <span className="broadcast-countdown-kicker">Эфиры доступны сейчас</span>
                 <strong>{broadcastCountdown.expired ? "Таймер завершён" : "До окончания доступа к эфирам"}</strong>
-                <p>Доступно до: 6 июня 2026, 23:59 МСК</p>
               </div>
               <div className="broadcast-countdown-grid" aria-hidden={broadcastCountdown.expired}>
                 <span><strong>{broadcastCountdown.days}</strong><small>дней</small></span>
