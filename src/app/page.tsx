@@ -593,7 +593,7 @@ export default function Home() {
 
       <main className="landing">
         {/* ===== BROADCAST REPLAYS ===== */}
-        <section className="section broadcasts-section reveal-section" id="broadcasts">
+        <section className="section broadcasts-section reveal-section" id="broadcasts" style={{ display: "none" }}>
           <div className="container">
             <div className="section-head broadcasts-head">
               <h2>Запись эфира + все спецусловия — только 48 часов</h2>
