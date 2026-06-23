@@ -382,7 +382,7 @@ const GetCourseWidget: React.FC<GetCourseWidgetProps> = ({ scriptId, widgetId })
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [countdownText, setCountdownText] = useState("Старт потока — 8 июня");
+  const [countdownText, setCountdownText] = useState("Старт сразу после оплаты");
   const [broadcastCountdown, setBroadcastCountdown] = useState({
     expired: false,
     days: "00",
@@ -485,7 +485,7 @@ export default function Home() {
       const now = Date.now();
       const diff = targetDate - now;
       if (diff <= 0) {
-        setCountdownText("Старт потока — 8 июня");
+        setCountdownText("Старт сразу после оплаты");
         return;
       }
 
@@ -493,7 +493,7 @@ export default function Home() {
       const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-      let text = "Старт потока — 8 июня";
+      let text = "Старт сразу после оплаты";
       if (days > 0) {
         text += ` · через ${days} дн. ${hours} ч. ${minutes} мин.`;
       }
@@ -655,7 +655,7 @@ export default function Home() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="hero-eyebrow">
-                <span>Старт обучения <strong>8 июня</strong></span>
+                <span>Старт обучения, <strong>сразу после оплаты</strong></span>
                 <span className="hero-eyebrow-separator">·</span>
                 <span>Количество мест ограничено</span>
               </p>
@@ -742,7 +742,7 @@ export default function Home() {
               <span className="sep">·</span>
               <span>10 инструментов</span>
               <span className="sep">·</span>
-              <span>Старт 8 июня</span>
+              <span>Старт сразу после оплаты</span>
               <span className="sep">·</span>
               <span>Рассрочка 0%</span>
               <span className="sep">·</span>
@@ -758,7 +758,7 @@ export default function Home() {
               <span className="sep">·</span>
               <span>10 инструментов</span>
               <span className="sep">·</span>
-              <span>Старт 8 июня</span>
+              <span>Старт сразу после оплаты</span>
               <span className="sep">·</span>
               <span>Рассрочка 0%</span>
               <span className="sep">·</span>
@@ -774,7 +774,7 @@ export default function Home() {
               <span className="sep">·</span>
               <span>10 инструментов</span>
               <span className="sep">·</span>
-              <span>Старт 8 июня</span>
+              <span>Старт сразу после оплаты</span>
               <span className="sep">·</span>
               <span>Рассрочка 0%</span>
               <span className="sep">·</span>
@@ -790,7 +790,7 @@ export default function Home() {
               <span className="sep">·</span>
               <span>10 инструментов</span>
               <span className="sep">·</span>
-              <span>Старт 8 июня</span>
+              <span>Старт сразу после оплаты</span>
               <span className="sep">·</span>
               <span>Рассрочка 0%</span>
               <span className="sep">·</span>
