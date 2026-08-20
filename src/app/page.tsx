@@ -1457,8 +1457,8 @@ export default function Home() {
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/b69030d4c94baeb8f2dd2fd7775df5ed.pdf" target="_blank" rel="noopener">Политика обработки персональных данных</a>
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/5bdab7bbf2de4293f7fa895ef1dfdca3.pdf" target="_blank" rel="noopener">Согласие на обработку персональных данных</a>
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/0299becb7a7fe4a85eea80dbcff2f411.pdf" target="_blank" rel="noopener">Согласие на получение рекламы</a>
-              <a href="https://monterium.site/doc" target="_blank" rel="noopener">Сведения об образовательной организации</a>
-              <a href="https://monterium.ru/pl/fileservice/user/file/download/h/4aeaf22ebca129e110ba8f0426a97143.pdf" target="_blank" rel="noopener">Оферта</a>
+              <a href="https://monterium.site/info" target="_blank" rel="noopener">Сведения об образовательной организации</a>
+              <a href="https://fondovyi.monterium-edu.ru/kurs/oferta" target="_blank" rel="noopener">Оферта</a>
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/a69c03368bbda7b408c2adfbce471c6c.pdf" target="_blank" rel="noopener">Правила акции</a>
             </nav>
             <div className="footer-company">
